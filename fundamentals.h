@@ -12,5 +12,5 @@ Node* LRR(Node* root);
 Node* RLR(Node* root);
 Node* search(Node* root, int key);
 
-#endif // AVLTREE_H
+#endif
 
