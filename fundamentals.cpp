@@ -1,8 +1,7 @@
 #include <bits/stdc++.h>
-
-void Updateheight(struct Node* root)
-{
-    if (root != NULL) {
+#include "fundamentals.h"
+void Updateheight(struct Node* root){
+    if (root != NULL){
         int val = 1;
         if (root->left != NULL)
             val = root->left->height + 1;
@@ -107,4 +106,4 @@ Node* search(struct Node* root, int key){
         Node* node = AVLsearch(root->right, key);
         return node;
     }
-}//created this file to make functionsn like getheigt, rightrotate, leftrotatate and any other functions which will be needed in both insertion and deletion
+}
