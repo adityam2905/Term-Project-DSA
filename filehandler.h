@@ -39,5 +39,6 @@ void print_roll_between(Node* root, int n1, int n2);
 void print_student_greater_cgpa(Node* root, float cgpa);
 void print_student_lesser_cgpa(Node* root, float cgpa);
 void print_student_between_cgpa(Node* root, float cgpa_low, float cgpa_high);
-
+void inOrderTraversal(Node*root);
 #endif // FILEHANDLER_H
+
