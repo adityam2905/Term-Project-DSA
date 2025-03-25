@@ -11,7 +11,7 @@ vector<string> split_by_comma(const string& line) {
     return tokens;
 }
 
-void process_file(const char* filename, AVL& tree) {   // Changed AVL parameter to reference
+void process_file(const char* filename, AVL& tree) {
     ifstream file(filename);
     if (!file.is_open()) {
         cerr << "Error: Could not open file " << filename << endl;
@@ -21,93 +21,104 @@ void process_file(const char* filename, AVL& tree) {   // Changed AVL parameter 
     string line;
     while (getline(file, line)) {
         if (line == "# 1") {  // Start of student data section
+            cout << "Processing: #1 (Student Data)\n";
             while (getline(file, line) && !line.empty() && line[0] != '#') {
                 vector<string> lines;
-
-                // Extract the number of courses from the line
                 int num_courses = stoi(split_by_comma(line)[3]);
                 vector<Course*> student_courses;
 
-                // Add the student info line to the lines vector
                 lines.push_back(line);
-
-                // Now, read the courses for this student
                 for (int i = 0; i < num_courses; i++) {
                     getline(file, line);
-
-                    // Split the course data by comma
                     vector<string> course_data = split_by_comma(line);
-
-                    // Create a Course object and add it to the student_courses vector
-                    Course *c = new Course(stoi(course_data[0]), stoi(course_data[1]));  // Both parameters are int
+                    Course *c = new Course(stoi(course_data[0]), stoi(course_data[1]));
                     student_courses.push_back(c);
                 }
 
-                // Insert the student along with their courses into the AVL tree
                 handle_initial_db(tree, lines, student_courses);
             }
             tree.printTree();
-        } else if (line == "# 7") { // Example command block for roll greater than
-            while (getline(file, line) && !line.empty() && line[0] != '#') {
-                handle_roll_greater_than(tree, line);
-            }
-            tree.printTree();
-        } else if (line == "# 8") { // Roll less than
-            while(getline(file, line) && !line.empty() && line[0] != '#') {
-                handle_roll_less_than(tree, line);
-            }
-            tree.printTree();
-        } else if (line == "# 9") { // Roll between
-            while(getline(file, line) && !line.empty() && line[0] != '#') {
-                handle_roll_between(tree, line);
-            }
-            tree.printTree();
-        } else if (line == "# 10") { // CGPA greater than
-            while(getline(file, line) && !line.empty() && line[0] != '#') {
-                handle_CGPA_greater_than(tree, line);
-            }
-            tree.printTree();
-        } else if (line == "# 11") { // CGPA lesser than
-            while(getline(file, line) && !line.empty() && line[0] != '#') {
-                handle_CGPA_lesser_than(tree, line);
-            }
-            tree.printTree();
-        } else if (line == "# 12") { // CGPA between
-            while(getline(file, line) && !line.empty() && line[0] != '#') {
-                handle_CGPA_between_than(tree, line);
-            }
-            tree.printTree();
-        } else if (line == "# 2") { // Modify student
+        } 
+        else if (line == "# 2") {  
+            cout << "Processing: #2 (Modify Student)\n";
             while (getline(file, line) && !line.empty() && line[0] != '#') {
                 handle_modify_student(tree, line);
             }
             tree.printTree();
-        } else if (line == "# 6") { // Delete student
-            while (getline(file, line) && !line.empty() && line[0] != '#') {
-                handle_delete_student(tree, line);
-            }
-            tree.printTree();
-        } else if (line == "# 3") { // Add course
+        } 
+        else if (line == "# 3") {  
+            cout << "Processing: #3 (Add Course)\n";
             while (getline(file, line) && !line.empty() && line[0] != '#') {
                 handle_add_course(tree, line);
             }
             tree.printTree();
-        } else if (line == "# 4") { // Modify course
+        } 
+        else if (line == "# 4") {  
+            cout << "Processing: #4 (Modify Course)\n";
             while (getline(file, line) && !line.empty() && line[0] != '#') {
                 handle_modify_course(tree, line);
             }
             tree.printTree();
-        } else if (line == "# 5") { // Delete course
+        } 
+        else if (line == "# 5") {  
+            cout << "Processing: #5 (Delete Course)\n";
             while (getline(file, line) && !line.empty() && line[0] != '#') {
                 handle_delete_course(tree, line);
+            }
+            tree.printTree();
+        } 
+        else if (line == "# 6") {  
+            cout << "Processing: #6 (Delete Student)\n";
+            while (getline(file, line) && !line.empty() && line[0] != '#') {
+                handle_delete_student(tree, line);
+            }
+            tree.printTree();
+        } 
+        else if (line == "# 7") {  
+            cout << "Processing: #7 (Roll Greater Than)\n";
+            while (getline(file, line) && !line.empty() && line[0] != '#') {
+                handle_roll_greater_than(tree, line);
+            }
+            tree.printTree();
+        } 
+        else if (line == "# 8") {  
+            cout << "Processing: #8 (Roll Less Than)\n";
+            while (getline(file, line) && !line.empty() && line[0] != '#') {
+                handle_roll_less_than(tree, line);
+            }
+            tree.printTree();
+        } 
+        else if (line == "# 9") {  
+            cout << "Processing: #9 (Roll Between)\n";
+            while (getline(file, line) && !line.empty() && line[0] != '#') {
+                handle_roll_between(tree, line);
+            }
+            tree.printTree();
+        } 
+        else if (line == "# 10") {  
+            cout << "Processing: #10 (CGPA Greater Than)\n";
+            while (getline(file, line) && !line.empty() && line[0] != '#') {
+                handle_CGPA_greater_than(tree, line);
+            }
+            tree.printTree();
+        } 
+        else if (line == "# 11") {  
+            cout << "Processing: #11 (CGPA Less Than)\n";
+            while (getline(file, line) && !line.empty() && line[0] != '#') {
+                handle_CGPA_lesser_than(tree, line);
+            }
+            tree.printTree();
+        } 
+        else if (line == "# 12") {  
+            cout << "Processing: #12 (CGPA Between)\n";
+            while (getline(file, line) && !line.empty() && line[0] != '#') {
+                handle_CGPA_between_than(tree, line);
             }
             tree.printTree();
         }
     }
     file.close();
 }
-
-
 
 
 void handle_initial_db(AVL& tree, vector<string> lines, vector<Course*> student_courses) {
@@ -316,7 +327,12 @@ void handle_modify_course(AVL &tree, string line) {
         }
     }
 }
-
+void inOrderTraversal(Node* root) {
+    if (!root) return;
+    inOrderTraversal(root->left);
+    cout << "Roll No: " << root->value << ", Name: " << root->name << ", CGPA: " << root->cgpa << endl;
+    inOrderTraversal(root->right);
+}
 void handle_delete_course(AVL &tree, string line) {
     vector<string> data = split_by_comma(line);
     int roll_no = stoi(data[0]);
